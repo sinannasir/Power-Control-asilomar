@@ -145,6 +145,8 @@ Average FP iterations per run: 43.95<br />
 	}
 	> **Note:** If you set cuda to True, running python files in parallel as done in the scripts will not work.<br />
 	
-	> **Note:** Scaling parameters are used to scale the channel gains in dB before feeding them into neural networks.</sub><br />
+	> **Note:** Scaling parameters are used to scale the channel gains in dB before feeding them into neural networks.<br />
+	
+	> **Note:** We provide a DQN implementation for reference. Its config file has num_actions option in addition to the ones listed above.</sub><br />
 2. Deployment scenarios are in ./config/deployment/. There are two types of configuration files: train and test. Please examine both before using.
 
