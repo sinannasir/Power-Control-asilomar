@@ -1,0 +1,2 @@
+model_checkpoint_path: "train_K5_N10_shadow10_episode2-5000_travel50000_vmax2_5_ddpg200_100_50_network0_episode2.ckpt"
+all_model_checkpoint_paths: "train_K5_N10_shadow10_episode2-5000_travel50000_vmax2_5_ddpg200_100_50_network0_episode2.ckpt"
