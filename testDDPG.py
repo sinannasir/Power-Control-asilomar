@@ -11,11 +11,7 @@ import json
 import DDPG
 import copy
 import os
-
 import argparse
-
-
-
 
 def main(args):
     
@@ -49,12 +45,11 @@ def main(args):
         inner_train_networks = [[]]*tot_test_episodes
         for i in range(tot_test_episodes):
             if options['simulation']['test_include'] == 'all':
-                inner_train_networks[i] = 0#list(range(train_tot_simulations))
+                inner_train_networks[i] = 0
             else:
                 inner_train_networks[i] = list(np.random.randint(0,train_tot_simulations,options['simulation']['test_include']))
-        ## Kumber of samples
+        ## Number of samples
         total_samples = options['simulation']['total_samples']
-        
         
         
         # simulation parameters
@@ -103,7 +98,7 @@ def main(args):
             time_optimization_at_each_slot_takes = []
             sum_rate_distributed_policy_episode = []
             p_strategy_all_apisode = []
-    #        for i_train in range(len(inner_train_networks[0])):
+            
             sum_rate_distributed_policy = []
             sum_rate_list_distributed_policy = collections.deque([],2)
             # Initial allocation is just random
@@ -121,7 +116,7 @@ def main(args):
                 for sim in range (total_samples):
                     # save an instance per training episode for testing purposes.
                     if(sim %train_episodes['T_train'] == 0):
-                        train_network_idx = i_train#inner_train_networks[int(sim /train_episodes['T_train'])][i_train]
+                        train_network_idx = i_train
                         model_destination = ('./simulations/sumrate/policy/%s_%s_network%d_episode%d.ckpt'%(
                                 json_file_train,json_file_policy_train,train_network_idx,ep)).replace('[','').replace(']','')
                         policy.load(sess,model_destination)
@@ -184,21 +179,7 @@ def main(args):
             np.savez(np_save_path,options,options_policy,sum_rate_distributed_policy_episode,p_strategy_all_apisode,
                      time_optimization_at_each_slot_takes,time_calculating_strategy_takes,included_train_episodes,inner_train_networks)
     
-if __name__ == "__main__": 
-
-    json_file = "test_K10_N20_shadow10_episode5-2500_travel0_vmax2_5"
-    json_file = "test_K20_N40_shadow10_episode5-2500_travel0_vmax2_5" 
-    json_file = "test_K20_N60_shadow10_episode5-2500_travel0_vmax2_5_" 
-    json_file = "test_K20_N80_shadow10_episode5-2500_travel0_vmax2_5" 
-    json_file = "test_K20_N100_shadow10_episode5-2500_travel0_vmax2_5" 
-    
-    json_files_train = ["train_K10_N20_shadow10_episode10-5000_travel50000_vmax2_5",
-                        "train_K10_N20_shadow10_episode10-5000_travel0_fd10"]
-    json_files_train = ["train_K10_N20_shadow10_episode2-5000_travel50000_vmax2_5",
-                        "train_K10_N20_shadow10_episode2-5000_travel0_fd10"]
-    
-    json_file_policy_train = 'ddpg200_100_50'
-    
+if __name__ == "__main__":     
     parser = argparse.ArgumentParser(description='give test scenarios.')
     parser.add_argument('--json-file', type=str, default='test_K10_N20_shadow10_episode5-2500_travel0_vmax2_5',
                        help='json file for the deployment')
